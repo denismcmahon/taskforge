@@ -1,43 +1,36 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { register } from "@/lib/api";
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { register } from '@/lib/api';
 
 export default function RegisterPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const router = useRouter();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     try {
       await register(email, password);
-      router.push("/login");
+      router.push('/login');
     } catch (err) {
-      setError("Registration failed");
+      setError('Registration failed');
     }
   }
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white p-8 rounded-lg shadow-lg w-96"
-      >
-        <h1 className="text-2xl font-bold mb-6 text-gray-800 text-center">
-          Register
-        </h1>
+      <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-lg w-96">
+        <h1 className="text-2xl font-bold mb-6 text-gray-800 text-center">Register</h1>
 
-        {error && (
-          <p className="text-red-600 text-sm mb-4 text-center">{error}</p>
-        )}
+        {error && <p className="text-red-600 text-sm mb-4 text-center">{error}</p>}
 
         <input
           type="email"
           placeholder="Email"
-          className="w-full mb-3 p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full mb-3 p-3 border border-gray-300 rounded text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -45,7 +38,7 @@ export default function RegisterPage() {
         <input
           type="password"
           placeholder="Password"
-          className="w-full mb-4 p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full mb-4 p-3 border border-gray-300 rounded text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
@@ -58,7 +51,7 @@ export default function RegisterPage() {
         </button>
 
         <p className="text-center text-sm text-gray-600 mt-4">
-          Already have an account?{" "}
+          Already have an account?{' '}
           <a href="/login" className="text-blue-600 hover:underline">
             Login
           </a>
